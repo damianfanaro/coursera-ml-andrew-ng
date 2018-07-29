@@ -20,13 +20,13 @@ grad = zeros(size(theta));
 h = sigmoid(X * theta);
 intra_cost = -y .* log(h) - (1 - y) .* log(1 - h);
 J_no_regularised = (1/m) * sum(intra_cost);
-regularization = (lambda / (2*m)) * sum(theta(2:size(theta, 1),1).^2);
+regularization = (lambda / (2*m)) * sum(theta(2:end,:) .^ 2);
 J = J_no_regularised + regularization;
 
- summation = 1/m * (X' * (h - y));
- theta(1) = 0;
- regularised_term = (lambda/m) * theta;
- grad = summation + regularised_term;
+summation = 1/m * (X' * (h - y));
+theta(1) = 0;
+regularised_term = (lambda/m) * theta;
+grad = summation + regularised_term;
 
 
 % =============================================================
